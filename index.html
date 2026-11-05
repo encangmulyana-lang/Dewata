@@ -91,11 +91,13 @@ d.style.animationDelay=(Math.random()*8)+'s';box.appendChild(d);}
 </script>
 <script>
 const CONTRACT = "0x13628D733A26b942213BA1b3C61471925D4a2165"; // replaced with the real address after deploy
+const RPCS = ["https://bsc-dataseed.bnbchain.org", "https://bsc-dataseed1.binance.org", "https://rpc-bsc.48.club"];
 async function refreshMinted(){
   const el = document.getElementById('minted');
-  if(!CONTRACT || CONTRACT === "0x13628D733A26b942213BA1b3C61471925D4a2165"){ return; }
+  if(!CONTRACT){ return; }
+  for(let i=0;i<RPCS.length;i++){
   try{
-    const res = await fetch("https://bsc-dataseed.bnbchain.org", {method:"POST",
+    const res = await fetch(RPCS[i], {method:"POST",
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify({jsonrpc:"2.0",id:1,method:"eth_call",
         params:[{to:CONTRACT,data:"0xa2309ff8"},"latest"]})});
@@ -106,7 +108,10 @@ async function refreshMinted(){
       document.getElementById('barfill').style.width = (n/3333*100) + '%';
       document.getElementById('barlabel').textContent = (n/3333*100).toFixed(2) + '% minted · live from the blockchain';
     }
-  }catch(e){ /* keep last value on failure */ }
+    if(!isNaN(n)){ el.textContent = n.toLocaleString('en-US'); document.getElementById('barfill').style.width = (n/3333*100) + '%'; document.getElementById('barlabel').textContent = (n/3333*100).toFixed(2) + '% minted · live from the blockchain'; return; }
+  }catch(e){ /* try next RPC */ }
+  }
+  document.getElementById('barlabel').textContent = 'Could not load live count — please refresh the page';
 }
 refreshMinted(); setInterval(refreshMinted, 30000);
 </script>
