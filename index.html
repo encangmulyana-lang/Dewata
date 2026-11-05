@@ -75,7 +75,7 @@ footer{text-align:center;padding:30px 20px;color:#8a8060;font-size:13px;border-t
 <div class="step"><b>2. Stake &amp; earn.</b> Stake your NFT to earn 100 DWTA per day. Unstake anytime.</div>
 <div class="step"><b>3. Presale &amp; DEX.</b> NFT holders buy DWTA first at presale price, then DWTA lists on PancakeSwap.</div>
 </div></section>
-<footer>© DEWATA · Free NFT + paid DWTA token on BNB Smart Chain · Contract: 0xKONTRAK (not deployed yet)</footer>
+<footer>© DEWATA · Free NFT + paid DWTA token on BNB Smart Chain · Contract: 0x13628D733A26b942213BA1b3C61471925D4a2165 </footer>
 <script>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.15});
 document.querySelectorAll('.card').forEach(c=>io.observe(c));
@@ -86,10 +86,10 @@ d.style.left=(Math.random()*100)+'%';d.style.animationDuration=(6+Math.random()*
 d.style.animationDelay=(Math.random()*8)+'s';box.appendChild(d);}
 </script>
 <script>
-const CONTRACT = "0xKONTRAK"; // replaced with the real address after deploy
+const CONTRACT = "0x13628D733A26b942213BA1b3C61471925D4a2165"; // replaced with the real address after deploy
 async function refreshMinted(){
   const el = document.getElementById('minted');
-  if(!CONTRACT || CONTRACT === "0xKONTRAK"){ return; }
+  if(!CONTRACT || CONTRACT === "0x13628D733A26b942213BA1b3C61471925D4a2165"){ return; }
   try{
     const res = await fetch("https://bsc-dataseed.bnbchain.org", {method:"POST",
       headers:{"Content-Type":"application/json"},
